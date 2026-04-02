@@ -1,0 +1,18 @@
+# configs/methods/resnet.yaml
+name: resnet
+
+training:
+  epochs: 50
+  batch_size: 64
+
+optimizer:
+  lr: 1e-4 # waterbird/fairface: avg_acc/worst_group_acc 1e-4
+  weight_decay: 0.0 # waterbirds: avg_acc/worst_group_acc 1e-3; fairface: avg_acc/worst_group_acc 0.0
+
+testing:
+  output_csv: ./evaluation/resnet_${dataset.name}_avg_results.csv
+  pretrained_path: ${method.results_dir}/${method.exp_name}
+  worst_group: false
+
+exp_name: final/lr_${method.optimizer.lr}_wd_${method.optimizer.weight_decay}
+results_dir: ./results/resnet18_baseline/${dataset.name}

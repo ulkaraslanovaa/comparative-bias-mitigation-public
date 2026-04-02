@@ -1,0 +1,22 @@
+# configs/methods/jtt.yaml
+name: jtt
+
+training:
+  epochs: 50 
+  final_epoch: 3 # waterbirds/fairface: avg_acc/worst_group_acc 3
+  batch_size: 64 
+
+optimizer:
+  lr: 1e-4 # waterbirds/fairface: 1e-4
+  weight_decay: 0.0 # waterbirds: 1e-3, fairface: 0.0
+
+testing:
+  output_csv: ./evaluation/jtt_${dataset.name}_worst_group_results.csv
+  # waterbirds: avg_acc upweight 50, worst_group_acc upweight 100
+  # fairface: avg_acc upweight 20, worst_group_acc upweight 100
+  pretrained_path: ${method.results_dir}/${dataset.name}/${method.exp_name}/train_downstream_ERM_upweight_0_epochs_${method.training.epochs}_lr_${method.optimizer.lr}_weight_decay_${method.optimizer.weight_decay}/final_epoch${method.training.final_epoch}/JTT_upweight_100_epochs_${method.training.epochs}_lr_${method.optimizer.lr}_weight_decay_${method.optimizer.weight_decay}/model_outputs
+  worst_group: true
+
+exp_name: final
+results_dir: ./results/jtt
+method_dir: ./methods/jtt

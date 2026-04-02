@@ -1,0 +1,9 @@
+data/fairface/data/
+data/waterbirds/data/
+multirun/
+outputs/
+results/
+wandb/
+.hydra/
+.vscode/
+__pycache__/

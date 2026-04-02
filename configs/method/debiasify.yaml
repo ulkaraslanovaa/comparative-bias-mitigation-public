@@ -1,0 +1,31 @@
+# configs/method/debiasify.yaml
+name: debiasify
+
+training:
+  epochs: 50
+  batch_size: 64
+  warmup_epochs: 3 # waterbirds: avg_acc/worst_group_acc: 5, fairface: avg_acc/worst_group_acc: 3
+  alpha: 0.05 # waterbirds: avg_acc: 0.05, worst_group_acc: 0.2, fairface: avg_acc: 0.05, worst_group_acc: 0.1
+  wandb: true
+
+optimizer:
+  lr: 1e-4 # waterbirds/fairface: 1e-4
+  weight_decay: 0.0 # waterbirds: 1e-3, fairface: 0.0
+
+# gamma_4.0_alpha_0.05_warmup_3/best_overall.txt, gamma_0.1_alpha_0.1_warmup_3/best_worst.txt"
+clustering:
+  gamma: 4.0 # waterbirds: avg_acc: 4.0, worst_group_acc: 2.0, fairface: avg_acc: 4.0, worst_group_acc: 0.1
+
+model:
+  backbone: ResNet18
+  pretrained: true
+
+# Where to store outputs/checkpoints
+results_dir: ./results/debiasify
+exp_name: final/gamma_${method.clustering.gamma}_alpha_${method.training.alpha}_warmup_${method.training.warmup_epochs} #_lr_${method.optimizer.lr}_wd_${method.optimizer.weight_decay}_aug
+method_dir: ./methods/debiasify
+
+# Evaluation outputs
+testing:
+  output_csv: ./evaluation/debiasify_${dataset.name}_avg_results.csv
+  pretrained_path: ${method.results_dir}/${dataset.name}/${method.exp_name}/best_overall.pth

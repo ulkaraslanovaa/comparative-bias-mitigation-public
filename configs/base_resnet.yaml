@@ -1,0 +1,9 @@
+defaults:
+  - _self_
+  - base
+
+hydra:
+  sweeper:
+    params:
+      method.optimizer.lr: 1e-4, 1e-3, 1e-2
+      method.optimizer.weight_decay: 0.0, 1e-4, 1e-3

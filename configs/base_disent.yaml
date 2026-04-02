@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+  - base
+
+hydra:
+  sweeper:
+    params:
+      method.loss.lambda_dis_align: 0.1, 1.0, 2.0
+      method.loss.lambda_swap_align: 0.1, 1.0, 2.0
+      method.loss.lambda_swap: 0.01, 0.1, 0.5

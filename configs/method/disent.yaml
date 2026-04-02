@@ -1,0 +1,28 @@
+# configs/methods/disent.yaml
+name: disent
+
+training:
+  epochs: 50
+  curr_epoch: 10
+  batch_size: 64
+  wandb: true
+  train_ours: true
+
+optimizer:
+  lr: 1e-4 # waterbirds/fairface: 1e-4
+  weight_decay: 1e-3 # waterbirds: 1e-3, fairface: 0.0
+
+loss:
+  lambda_dis_align: 0.1  # waterbirds: avg_acc 1.0, worst_group_acc 0.1, fairface: avg_acc 1.0, worst_group_acc 0.1
+  lambda_swap_align: 2.0  # waterbirds: avg_acc 1.0, worst_group_acc 2.0, fairface: avg_acc 1.0, worst_group_acc 2.0
+  lambda_swap:  0.01       # waterbirds: avg_acc/worst_group_acc 0.01, fairface: avg_acc 0.5, worst_group_acc 0.01
+
+testing:
+  output_csv: ./evaluation/disent_${dataset.name}_worst_group_results.csv
+  pretrained_path: ${method.results_dir}/${dataset.name}/${method.exp_name}
+  worst_group: true
+
+exp_name: final/lda${method.loss.lambda_dis_align}_lsa${method.loss.lambda_swap_align}_ls${method.loss.lambda_swap}
+results_dir: ./results/disent
+method_dir: ./methods/disent
+

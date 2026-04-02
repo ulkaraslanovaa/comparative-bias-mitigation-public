@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+  - method: debiasify
+
+seed: 42
+stage: test
+
+dataset:
+  name: fairface # waterbirds
+  root_dir: ./data/fairface # ./data/waterbirds

@@ -1,0 +1,23 @@
+checkpoint_dir: ./results/debiasify/fairface/final/gamma_4.0_alpha_0.05_warmup_3
+clustering:
+  gamma: 4.0
+  method: adaptive K-means
+data_root: ./data/fairface
+dataset_name: fairface
+exp_name: final/gamma_4.0_alpha_0.05_warmup_3
+model:
+  backbone: ResNet18
+  pretrained: true
+seed: 42
+training:
+  alpha: 0.05
+  batch_size: 64
+  epochs: 50
+  learning_rate: 0.0001
+  wandb: true
+  warmup_epochs: 3
+  weight_decay: 0.0
+wandb:
+  entity: debias-medimg
+  name: final/gamma_4.0_alpha_0.05_warmup_3
+  project: debiasify_fairface
