@@ -61,19 +61,20 @@ Default dataset in `configs/base.yaml` is `fairface`.
 
 ## Environment setup
 
-### Option A: Conda from `jtt.yaml` (recommended)
+### Option A: Conda from `env.yml` (recommended)
 
 ```bash
-conda env create -f jtt.yaml
-conda activate jtt
+conda env create -f env.yml
+conda activate env
 ```
 
 ### Option B: Existing Python environment
 
-At minimum, install packages used across methods:
+Create and activate your environment first (venv/conda), then install:
 
 ```bash
-pip install hydra-core omegaconf pyyaml pandas numpy torch torchvision tqdm scikit-learn wandb
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 Some method folders also provide their own requirement files:
@@ -172,7 +173,7 @@ Saved under method-specific `results_dir` from config, for example:
 
 ### Evaluation CSV format
 
-Method test scripts export per-sample prediction tables (commonly including):
+Method test scripts export per-sample prediction tables:
 
 - `img_path`
 - `y_true`
